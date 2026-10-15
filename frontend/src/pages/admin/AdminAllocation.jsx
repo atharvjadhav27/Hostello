@@ -17,12 +17,12 @@ export default function AdminAllocation() {
 
   const fetchData = async () => {
     try {
-      const roomRes = await axios.get('http://localhost:5000/api/allocation/rooms');
-      const prefRes = await axios.get('http://localhost:5000/api/allocation/preferences');
+      const roomRes = await axios.get('/allocation/rooms');
+      const prefRes = await axios.get('/allocation/preferences');
       
       // If DB rooms are totally empty, trigger seed silently
       if (roomRes.data.length === 0) {
-        await axios.post('http://localhost:5000/api/allocation/seed');
+        await axios.post('/allocation/seed');
         return fetchData(); // retry after seed
       }
 
@@ -41,7 +41,7 @@ export default function AdminAllocation() {
     // adding artificial delay for UI dramatic effect of "processing AI vectors"
     setTimeout(async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/allocation/gemini-run');
+        const response = await axios.post('/allocation/gemini-run');
         setAiReport(response.data);
         fetchData(); // refresh data
       } catch (err) {
@@ -63,7 +63,7 @@ export default function AdminAllocation() {
   const handleReset = async () => {
     if (confirm("Are you sure you want to forcibly evict all students and clear ALL allocations?!")) {
       try {
-        await axios.post('http://localhost:5000/api/allocation/reset');
+        await axios.post('/allocation/reset');
         setAiReport(null);
         fetchData();
       } catch (err) {

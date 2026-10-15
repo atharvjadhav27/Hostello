@@ -22,7 +22,7 @@ export default function AdminManagement() {
   const fetchData = async (tab) => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/admin/${tab}`);
+      const res = await axios.get(`/admin/${tab}`);
       setData(prev => ({ ...prev, [tab]: res.data }));
     } catch (err) {
       console.error(`Failed to fetch ${tab}`, err);
@@ -34,7 +34,7 @@ export default function AdminManagement() {
   const confirmDelete = async () => {
     const { tab, id } = deleteModal;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/${tab}/${id}`);
+      await axios.delete(`/admin/${tab}/${id}`);
       toast.success(`${tab.slice(0, -1)} deleted successfully.`);
       fetchData(tab);
     } catch (err) {
@@ -45,7 +45,7 @@ export default function AdminManagement() {
 
   const updateComplaintStatus = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/admin/complaints/${id}`, { status: newStatus });
+      await axios.put(`/admin/complaints/${id}`, { status: newStatus });
       toast.success('Status updated');
       fetchData('complaints'); // Refresh
     } catch (err) {

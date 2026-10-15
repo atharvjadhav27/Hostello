@@ -1,0 +1,6 @@
+node_modules
+.env
+*.log
+error_trace.json
+tmp_*.js
+public/uploads

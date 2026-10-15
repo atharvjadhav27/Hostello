@@ -10,8 +10,7 @@ const Payment = require('./src/models/Payment');
 const Leave = require('./src/models/Leave');
 const Notice = require('./src/models/Notice');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hostello')
-  .then(() => console.log('MongoDB Connected for Seeding'))
+mongoose.connect(process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hostello')  .then(() => console.log('MongoDB Connected for Seeding'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 const seedDatabase = async () => {

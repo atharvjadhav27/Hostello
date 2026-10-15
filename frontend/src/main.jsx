@@ -5,7 +5,7 @@ import App from './App.jsx'
 import axios from 'axios';
 
 // Global Axios Config
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('hostel_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;

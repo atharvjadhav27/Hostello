@@ -39,8 +39,8 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const statsRes = await axios.get('http://localhost:5000/api/dashboard/stats');
-      const chartsRes = await axios.get('http://localhost:5000/api/dashboard/charts');
+      const statsRes = await axios.get('/dashboard/stats');
+      const chartsRes = await axios.get('/dashboard/charts');
       
       setStats(statsRes.data);
       setCharts(chartsRes.data);

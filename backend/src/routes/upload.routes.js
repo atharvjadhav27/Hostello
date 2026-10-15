@@ -10,7 +10,7 @@ router.post('/', requireAuth, upload.single('file'), (req, res) => {
   
   // If using Cloudinary, req.file.path contains the cloud URL
   // If local, req.file.filename is used
-  const fileUrl = req.file.path ? req.file.path : `/uploads/${req.file.filename}`;
+  const fileUrl = process.env.CLOUDINARY_CLOUD_NAME ? req.file.path : `/uploads/${req.file.filename}`;
   res.json({ message: 'File uploaded successfully', url: fileUrl });
 });
 
